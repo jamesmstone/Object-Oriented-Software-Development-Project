@@ -10,9 +10,9 @@ import org.newdawn.slick.tiled.TiledMap;
 /**
  * Represents any object in the world.
  */
+
 /**
  * @author developer
- *
  */
 public class WorldObject {
     private int gameX, gameY;
@@ -20,11 +20,11 @@ public class WorldObject {
     protected Image background;
 
     /**
-     * @param x the initial x position of the object
-     * @param y the initial y position of the object
+     * @param x          the initial x position of the object
+     * @param y          the initial y position of the object
      * @param background the background image that represents the object
-     * @param width the width of the object (in px)
-     * @param height the height of the object (in px)
+     * @param width      the width of the object (in px)
+     * @param height     the height of the object (in px)
      */
     public WorldObject(int x, int y, Image background, int width, int height) {
         setxPos(x);
@@ -35,8 +35,8 @@ public class WorldObject {
     }
 
     /**
- 	 * @param x the initial x position of the object
-     * @param y the initial y position of the object
+     * @param x          the initial x position of the object
+     * @param y          the initial y position of the object
      * @param background the background image that represents the object
      */
     public WorldObject(int x, int y, Image background) throws SlickException {
@@ -49,6 +49,7 @@ public class WorldObject {
 
     /**
      * Renders the player in the correct position relative to the camera
+     *
      * @param cam the camera to position the object to.
      */
     public void render(Camera cam) {
@@ -56,7 +57,8 @@ public class WorldObject {
     }
 
     /**
-     * Moves the object in the x direction 
+     * Moves the object in the x direction
+     *
      * @param amount the amount to move in px
      */
     public void moveX(double amount) {
@@ -64,7 +66,8 @@ public class WorldObject {
     }
 
     /**
-     * Moves the object in the y direction 
+     * Moves the object in the y direction
+     *
      * @param amount the amount to move in px
      */
     public void moveY(double amount) {
@@ -73,6 +76,7 @@ public class WorldObject {
 
     /**
      * Get the object current x position
+     *
      * @return the x coordinate in px
      */
     public int getxPos() {
@@ -81,6 +85,7 @@ public class WorldObject {
 
     /**
      * Sets the objects x position
+     *
      * @param x the x coordinate to set in px
      */
     public void setxPos(int x) {
@@ -93,6 +98,7 @@ public class WorldObject {
 
     /**
      * Get the object current y position
+     *
      * @return the y coordinate in px
      */
     public int getyPos() {
@@ -101,6 +107,7 @@ public class WorldObject {
 
     /**
      * Sets the objects x position
+     *
      * @param y the y coordinate to set in px
      */
     public void setyPos(int y) {
@@ -114,6 +121,7 @@ public class WorldObject {
 
     /**
      * Returns the objects width
+     *
      * @return the width in px
      */
     public int getWidth() {
@@ -122,6 +130,7 @@ public class WorldObject {
 
     /**
      * Sets the objects width
+     *
      * @param width the width to set in px
      */
     public void setWidth(int width) {
@@ -130,6 +139,7 @@ public class WorldObject {
 
     /**
      * Gets the objects height
+     *
      * @return the height in px
      */
     public int getHeight() {
@@ -138,6 +148,7 @@ public class WorldObject {
 
     /**
      * Sets the objects height
+     *
      * @param height the height to set in px
      */
     public void setHeight(int height) {
@@ -146,6 +157,7 @@ public class WorldObject {
 
     /**
      * Gets the objects background
+     *
      * @return the background
      */
     public Image getBackground() {
@@ -154,6 +166,7 @@ public class WorldObject {
 
     /**
      * Sets the objects background
+     *
      * @param background the background to set
      */
     public void setBackground(Image background) {
@@ -163,6 +176,7 @@ public class WorldObject {
 
     /**
      * Determines in the co-ordinates x,y is blocked for the object.
+     *
      * @param x the x coordinate in px
      * @param y the y coordinate in px
      * @return whether the new position is blocked

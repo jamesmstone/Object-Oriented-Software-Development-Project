@@ -10,33 +10,29 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.SlickException;
 
-/** This class is provided to reduce the complexity of loading fonts.
+/**
+ * This class is provided to reduce the complexity of loading fonts.
  */
-public class FontLoader
-{
-    /** Loads a font from a TTF file.
+public class FontLoader {
+    /**
+     * Loads a font from a TTF file.
+     *
      * @param ttf_filename Path to a TTF font file to use to draw text.
-     * @param textsize Font size, in points.
+     * @param textsize     Font size, in points.
      * @return A font object. May be used with Graphics.setFont to set the
-     *   default rendering font for the game.
+     * default rendering font for the game.
      */
     public static Font loadFont(String ttf_filename, float textsize)
-        throws SlickException
-    {
+            throws SlickException {
         // First, load a java.awt.Font of the given TTF file
         java.awt.Font awtfont;
-        try
-        {
+        try {
             awtfont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT,
-                new File(ttf_filename));
-        }
-        catch (java.io.IOException e)
-        {
+                    new File(ttf_filename));
+        } catch (java.io.IOException e) {
             throw new SlickException("Could not open font file "
-                + ttf_filename);
-        }
-        catch (java.awt.FontFormatException e)
-        {
+                    + ttf_filename);
+        } catch (java.awt.FontFormatException e) {
             throw new SlickException("Could not load font " + ttf_filename);
         }
         // Create a "derived font" with the correct font size
