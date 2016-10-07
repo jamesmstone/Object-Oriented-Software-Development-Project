@@ -1,121 +1,84 @@
-/* SWEN20003 - Object Oriented Software Development
- * Camera
- * Author: James Stone <stone1> 761353
+/* SWEN20003 Object Oriented Software Development
+ * RPG Game Engine
+ * Author: <Your name> <Your login>
  */
 
 import org.newdawn.slick.SlickException;
 
-/**
- * Represents the camera that controls our viewpoint.
+/** Represents the camera that controls our viewpoint.
  */
-public class Camera {
+public class Camera
+{
 
-    /**
-     * The unit this camera is following
-     */
-    private WorldObject unitFollow;
-
-    /** The width and height of the screen in pixels*/
-    public final int screenWidth;
-    public final int screenHeight;
+    /** The unit this camera is following */
+    private Player unitFollow;
     
-    /** The width and height of the map */
-    public final int mapWidth;
-    public final int mapHeight;
-    
+    /** The width and height of the screen */
+    /** Screen width, in pixels. */
+    private int screenwidth;
+    /** Screen height, in pixels. */
+    private int screenheight;
 
-    /**
-     * The camera's position in the world, in x and y coordinates.
-     */
+    /** The camera's position in the world, in x and y coordinates. */
     private int xPos;
     private int yPos;
 
-
-    /**
-     * Create a new Camera object.
-     *
-     * @throws SlickException
+    /** Create a new Camera object.
+     * 
+     * @param player The player to follow
+     * @param screenwidth The width of the viewport in pixels
+     * @param screenheight The height of the viewport in pixels
      */
-    public Camera(WorldObject unit, int screenWidth, int screenHeight, int mapWidth, int mapHeight)
-            throws SlickException {
-        this.followUnit(unit);
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
+    public Camera(Player player, int screenwidth, int screenheight)
+    {   
+        this.unitFollow = player;
+        this.screenwidth = screenwidth;
+        this.screenheight = screenheight;
     }
 
-
-    /**
-     * Update the game camera to re-centre it's viewpoint around the player
-     * @throws SlickException
+    /** Update the game camera to re-centre its viewpoint around the player 
      */
     public void update()
-            throws SlickException {
-    	// If not off the map, set the camera to share WorldObject position.
-        if (unitFollow.getxPos() < mapWidth
-                && unitFollow.getxPos() > 0) {
-            xPos = unitFollow.getxPos() - (screenWidth / 2);
-        }
-
-        if (unitFollow.getyPos() < mapHeight
-                && unitFollow.getyPos() > 0) {
-            yPos = unitFollow.getyPos() - (screenHeight / 2);
-        }
+    throws SlickException
+    {
+           // Update the camera based on the player's position
+        xPos = (int) unitFollow.getX() - (screenwidth/2);
+        yPos = (int) unitFollow.getY() - (screenheight/2); 
     }
-
-    /**
-     * @return Returns the minimum x value on screen
+        
+    /** Returns the minimum x value on screen 
      */
-    public int getMinX() {
-        return xPos - screenWidth / 2;
-    }
-
-    /**
-     * @return Returns the maximum x value on screen
-     */
-    public int getMaxX() {
-        return xPos + screenWidth / 2;
-    }
-
-    /**
-     * @return Returns the minimum y value on screen
-     */
-    public int getMinY() {
-        return yPos - screenHeight / 2;
-    }
-
-
-    /**
-     * @return Returns the maximum y value on screen
-     */
-    public int getMaxY() {
-        return yPos + screenHeight / 2;
-    }
-
-    /**
-     * Tells the camera to follow a given unit.
-     * @param unit
-     * @throws SlickException
-     */
-    public void followUnit(WorldObject unit)
-            throws SlickException {
-        unitFollow = unit;
-    }
-
-    
-    /**
-     * @return the current camera's x position
-     */
-    public int getxPos() {
+    public int getMinX(){
         return xPos;
     }
-
-    /**
-     * @return the current camera's y position
+    
+    /** Returns the maximum x value on screen 
      */
-    public int getyPos() {
+    public int getMaxX(){
+        return xPos + screenwidth;
+    }
+    
+    /** Returns the minimum y value on screen 
+     */
+    public int getMinY(){
         return yPos;
     }
+    
+    /** Returns the maximum y value on screen 
+     */
+    public int getMaxY(){
+        return yPos+screenheight;
+    }
 
+    /** Tells the camera to follow a given unit.
+     * 
+     * @param unit The new unit to follow
+     */
+    public void followUnit(Object unit)
+    {
+        if(unit instanceof Player){
+            unitFollow = (Player) unit;
+        }
+    }
+    
 }
