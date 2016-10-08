@@ -27,6 +27,11 @@ public class RPG extends BasicGame {
      * Screen height, in pixels.
      */
     public static final int SCREEN_HEIGHT = 600;
+
+    /**
+     * Panel height, in pixels
+     */
+    public static final int PANEL_HEIGHT = 70;
     /**
      * The world of our game
      */

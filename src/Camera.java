@@ -1,6 +1,6 @@
 /* SWEN20003 Object Oriented Software Development
  * RPG Game Engine
- * Author: <Your name> <Your login>
+ * Author: James Stone 761353 stone1
  */
 
 import org.newdawn.slick.SlickException;
@@ -93,4 +93,11 @@ public class Camera {
         }
     }
 
+    public int getxPos() {
+        return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
 }

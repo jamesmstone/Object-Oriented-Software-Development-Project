@@ -1,16 +1,17 @@
 /* 433-294 Object Oriented Software Development
  * RPG Game Engine
- * Sample Solution
  * Author: Matt Giuca <mgiuca>
+ * Modified: James Stone 761353 stone1
  */
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
  * The character which the user plays as.
  */
-public class Player {
+public class Player extends Unit {
     private Image img = null;
     private Image img_flipped = null;
 
@@ -97,7 +98,7 @@ public class Player {
      * @param cam_x Camera x position in pixels.
      * @param cam_y Camera y position in pixels.
      */
-    public void render() {
+    public void render(Graphics g, int cam_x, int cam_y) {
         Image which_img;
         which_img = this.face_left ? this.img_flipped : this.img;
         which_img.drawCentered((int) x, (int) y);

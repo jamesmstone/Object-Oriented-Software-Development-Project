@@ -1,9 +1,10 @@
 /* 433-294 Object Oriented Software Development
  * RPG Game Engine
- * Sample Solution
  * Author: Matt Giuca <mgiuca>
+ * Modified: James Stone 761353 stone1
  */
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
@@ -90,7 +91,7 @@ public class World {
         g.translate(-camera.getMinX(), -camera.getMinY());
 
         // Render the player
-        player.render();
+        player.render(g, camera.getxPos(), camera.getyPos());
     }
 
     /**
