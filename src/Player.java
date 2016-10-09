@@ -15,6 +15,7 @@ import org.newdawn.slick.geom.Vector2f;
 public class Player extends Unit {
     // Pixels per millisecond
     private static final double speed = 0.25;
+    public org.newdawn.slick.Image panel = new Image(RPG.ASSETS_PATH + "/panel.png");
 
     public Player(Vector2f location) throws SlickException {
         super(location, new Image(RPG.ASSETS_PATH + "/units/player.png"));
