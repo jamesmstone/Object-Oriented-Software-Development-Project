@@ -8,10 +8,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 public class PrinceAldric extends NPC {
-    public static final int initialCooldown  = 0;
-    public static final int initialDamage = 0;
-    public static final int initialMaxHP     = 0;
-    public static final int initialHP        = 0;
+    public static final int initialCooldown = 0;
+    public static final int initialDamage   = 0;
+    public static final int initialMaxHP    = 0;
+    public static final int initialHP       = 0;
 
     public PrinceAldric(Vector2f position) throws SlickException {
         super(position, new Image(RPG.ASSETS_PATH + "/units/prince.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));

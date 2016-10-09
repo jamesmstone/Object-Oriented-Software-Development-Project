@@ -13,9 +13,9 @@ import org.newdawn.slick.geom.Vector2f;
  * The character which the user plays as.
  */
 public class Player extends Unit {
-    private static final double                  speed = 0.25; // Pixels per millisecond
-    public               org.newdawn.slick.Image panel = new Image(RPG.ASSETS_PATH + "/panel.png");
-    private int[] inventory = new int[]{};
+    private static final double                  speed     = 0.25; // Pixels per millisecond
+    public               org.newdawn.slick.Image panel     = new Image(RPG.ASSETS_PATH + "/panel.png");
+    private              int[]                   inventory = new int[]{};
 
     public static final int initialCooldown = 600;
     public static final int initialDamage   = 26;

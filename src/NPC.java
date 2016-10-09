@@ -8,7 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
 public class NPC extends Unit {
-    private String text;
+    private String  text;
     private boolean talking;
 
     public NPC(Vector2f position, Image image, Stats stats) {

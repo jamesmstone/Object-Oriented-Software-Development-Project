@@ -16,11 +16,11 @@ import org.newdawn.slick.tiled.TiledMap;
 public class World {
     private static final int PLAYER_START_X = 756, PLAYER_START_Y = 684;
 
-    private Player player = null;
-    private UnitManager units = null;
+    private Player      player = null;
+    private UnitManager units  = null;
     private final ItemManager items;
-    private TiledMap map = null;
-    private Camera camera = null;
+    private TiledMap map    = null;
+    private Camera   camera = null;
 
     /**
      * Map width, in pixels.
@@ -82,12 +82,12 @@ public class World {
     public void render(Graphics g)
             throws SlickException {
         // Render the relevant section of the map
-        int x = -(camera.getMinX() % getTileWidth());
-        int y = -(camera.getMinY() % getTileHeight());
+        int x  = -(camera.getMinX() % getTileWidth());
+        int y  = -(camera.getMinY() % getTileHeight());
         int sx = camera.getMinX() / getTileWidth();
         int sy = camera.getMinY() / getTileHeight();
-        int w = (camera.getMaxX() / getTileWidth()) - (camera.getMinX() / getTileWidth()) + 1;
-        int h = (camera.getMaxY() / getTileHeight()) - (camera.getMinY() / getTileHeight()) + 1;
+        int w  = (camera.getMaxX() / getTileWidth()) - (camera.getMinX() / getTileWidth()) + 1;
+        int h  = (camera.getMaxY() / getTileHeight()) - (camera.getMinY() / getTileHeight()) + 1;
         map.render(x, y, sx, sy, w, h);
 
         // Translate the Graphics object
@@ -117,34 +117,35 @@ public class World {
         }
 
         // Check the tile properties
-        int tile_x = (int) x / getTileWidth();
-        int tile_y = (int) y / getTileHeight();
-        int tileid = map.getTileId(tile_x, tile_y, 0);
-        String block = map.getTileProperty(tileid, "block", "0");
+        int    tile_x = (int) x / getTileWidth();
+        int    tile_y = (int) y / getTileHeight();
+        int    tileid = map.getTileId(tile_x, tile_y, 0);
+        String block  = map.getTileProperty(tileid, "block", "0");
         return !block.equals("0");
     }
 
-    /** Renders the player's status panel.
+    /**
+     * Renders the player's status panel.
+     *
      * @param g The current Slick graphics context.
      */
-    public void renderPanel(Graphics g)
-    {
+    public void renderPanel(Graphics g) {
         // Panel colours
-        Color LABEL = new Color(0.9f, 0.9f, 0.4f);          // Gold
-        Color VALUE = new Color(1.0f, 1.0f, 1.0f);          // White
+        Color LABEL  = new Color(0.9f, 0.9f, 0.4f);          // Gold
+        Color VALUE  = new Color(1.0f, 1.0f, 1.0f);          // White
         Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.8f);   // Black, transp
-        Color BAR = new Color(0.8f, 0.0f, 0.0f, 0.8f);      // Red, transp
+        Color BAR    = new Color(0.8f, 0.0f, 0.0f, 0.8f);      // Red, transp
 
         // Variables for layout
-        String text;                // Text to display
-        int text_x, text_y;         // Coordinates to draw text
-        int bar_x, bar_y;           // Coordinates to draw rectangles
-        int bar_width, bar_height;  // Size of rectangle to draw
-        int hp_bar_width;           // Size of red (HP) rectangle
-        int inv_x, inv_y;           // Coordinates to draw inventory item
+        String text;                   // Text to display
+        int    text_x, text_y;         // Coordinates to draw text
+        int    bar_x, bar_y;           // Coordinates to draw rectangles
+        int    bar_width, bar_height;  // Size of rectangle to draw
+        int    hp_bar_width;           // Size of red (HP) rectangle
+        int    inv_x, inv_y;           // Coordinates to draw inventory item
 
-        Player player = units.getPlayer();
-        Stats playerStats = player.getStats();
+        Player player      = units.getPlayer();
+        Stats  playerStats = player.getStats();
 
         float health_percent;       // Player's health, as a percentage
 
@@ -156,7 +157,7 @@ public class World {
         text_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT + 25;
         g.setColor(LABEL);
         g.drawString("Health:", text_x, text_y);
-        text = playerStats.getHp()+ "/" + playerStats.getMaxHP();
+        text = playerStats.getHp() + "/" + playerStats.getMaxHP();
 
         bar_x = 90;
         bar_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT + 20;
@@ -201,7 +202,7 @@ public class World {
         inv_x = 490;
         inv_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT
                 + ((RPG.PANEL_HEIGHT - 72) / 2);
-         for (int item : player.getInventory())                // TODO
+        for (int item : player.getInventory())                // TODO
         {
             // Render the item to (inv_x, inv_y)
 
