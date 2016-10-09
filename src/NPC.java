@@ -11,8 +11,8 @@ public class NPC extends Unit {
     private String text;
     private boolean talking;
 
-    public NPC(Vector2f position, Image image) {
-        super(position, image);
+    public NPC(Vector2f position, Image image, Stats stats) {
+        super(position, image, stats);
     }
 
     public void update(int delta, World world) {

@@ -13,12 +13,17 @@ import org.newdawn.slick.geom.Vector2f;
  * The character which the user plays as.
  */
 public class Player extends Unit {
-    // Pixels per millisecond
-    private static final double speed = 0.25;
-    public org.newdawn.slick.Image panel = new Image(RPG.ASSETS_PATH + "/panel.png");
+    private static final double                  speed = 0.25; // Pixels per millisecond
+    public               org.newdawn.slick.Image panel = new Image(RPG.ASSETS_PATH + "/panel.png");
+    private int[] inventory = new int[]{};
+
+    public static final int initialCooldown = 600;
+    public static final int initialDamage   = 26;
+    public static final int initialMaxHP    = 100;
+    public static final int initialHP       = 100;
 
     public Player(Vector2f location) throws SlickException {
-        super(location, new Image(RPG.ASSETS_PATH + "/units/player.png"));
+        super(location, new Image(RPG.ASSETS_PATH + "/units/player.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
     }
 
     public void update(int delta, World world) {
@@ -50,5 +55,9 @@ public class Player extends Unit {
      */
     public void render(Graphics g, Camera camera) {
         super.render(g, camera);
+    }
+
+    public int[] getInventory() {
+        return inventory;
     }
 }

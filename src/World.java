@@ -144,6 +144,7 @@ public class World {
         int inv_x, inv_y;           // Coordinates to draw inventory item
 
         Player player = units.getPlayer();
+        Stats playerStats = player.getStats();
 
         float health_percent;       // Player's health, as a percentage
 
@@ -155,13 +156,13 @@ public class World {
         text_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT + 25;
         g.setColor(LABEL);
         g.drawString("Health:", text_x, text_y);
-        text = "??/??";                                 // TODO: HP / Max-HP
+        text = playerStats.getHp()+ "/" + playerStats.getMaxHP();
 
         bar_x = 90;
         bar_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT + 20;
         bar_width = 90;
         bar_height = 30;
-        health_percent = 0.75f;                         // TODO: HP / Max-HP
+        health_percent = playerStats.getHp() / playerStats.getMaxHP();
         hp_bar_width = (int) (bar_width * health_percent);
         text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
         g.setColor(BAR_BG);
@@ -176,14 +177,14 @@ public class World {
         g.setColor(LABEL);
         g.drawString("Damage:", text_x, text_y);
         text_x += 80;
-        text = "??";                                    // TODO: Damage
+        text = String.valueOf(playerStats.getMaxDamage());
         g.setColor(VALUE);
         g.drawString(text, text_x, text_y);
         text_x += 40;
         g.setColor(LABEL);
         g.drawString("Rate:", text_x, text_y);
         text_x += 55;
-        text = "??";                                    // TODO: Cooldown
+        text = String.valueOf(playerStats.getCooldown());
         g.setColor(VALUE);
         g.drawString(text, text_x, text_y);
 
@@ -200,9 +201,10 @@ public class World {
         inv_x = 490;
         inv_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT
                 + ((RPG.PANEL_HEIGHT - 72) / 2);
-        // for (each item in the player's inventory)                // TODO
+         for (int item : player.getInventory())                // TODO
         {
             // Render the item to (inv_x, inv_y)
+
             inv_x += 72;
         }
     }
