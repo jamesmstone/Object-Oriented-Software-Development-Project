@@ -7,9 +7,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Item {
-    private Image image;
+    private Image    image;
     private Vector2f position;
-    private int ID;
+    private int      ID;
 
     public int getID() {
         return ID;

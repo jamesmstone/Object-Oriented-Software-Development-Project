@@ -8,8 +8,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 public class UnitManager {
-    private Player player;
-    private NPC[] npcs;
+    private Player    player;
+    private NPC[]     npcs;
     private Monster[] monsters;
     private Monster[] deletionStack;
 

@@ -18,15 +18,15 @@ public class RPG extends BasicGame {
     /**
      * Location of the "assets" directory.
      */
-    public static final String ASSETS_PATH = "assets";
+    public static final String ASSETS_PATH   = "assets";
     /**
      * Screen width, in pixels.
      */
-    public static final int SCREEN_WIDTH = 800;
+    public static final int    SCREEN_WIDTH  = 800;
     /**
      * Screen height, in pixels.
      */
-    public static final int SCREEN_HEIGHT = 600;
+    public static final int    SCREEN_HEIGHT = 600;
 
     /**
      * Panel height, in pixels
