@@ -30,7 +30,31 @@ public class Unit {
     }
 
     public void move(World world, Vector2f dx) {
+        Vector2f newPos = position.add(dx);
 
+        double new_x = newPos.getX();
+        double new_y = newPos.getY();
+
+        // Move in x first
+        double x_sign = Math.signum(dx.getX());
+        if (!world.terrainBlocks(new_x + x_sign * getImageWidth() / 2, position.getY() + getImageHeight() / 2) &&
+                !world.terrainBlocks(new_x + x_sign * getImageWidth() / 2, position.getY() - getImageHeight() / 2)) {
+            position.set((float) new_x, position.getY());
+        }
+
+        // Then move in y
+        double y_sign = Math.signum(dx.getY());
+        if (!world.terrainBlocks(position.getX() + getImageWidth() / 2, new_y + y_sign * getImageHeight() / 2) &&
+                !world.terrainBlocks(position.getX() - getImageWidth() / 2, new_y + y_sign * getImageHeight() / 2)) {
+            position.set(position.getX(), (float) new_y);
+        }
+
+        // update unit direction
+        if (dx.getX() > 0) {
+            this.face_left = false;
+        } else if (dx.getX() < 0) {
+            this.face_left = true;
+        }
     }
 
     public void renderImage(Graphics g, Camera camera) {
