@@ -4,14 +4,20 @@
  */
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Vector2f;
 
 public class Monster extends Unit {
 
 
     private float speed;
 
-    public void render(Graphics g, Camera camera) {
+    public Monster(Vector2f position, Image image) {
+        super(position, image);
+    }
 
+    public void render(Graphics g, Camera camera) {
+        super.render(g, camera);
     }
 
     public void onDeath(World world) {

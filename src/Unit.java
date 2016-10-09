@@ -10,9 +10,16 @@ import org.newdawn.slick.geom.Vector2f;
 public class Unit {
     private Vector2f position;
     private String name;
-    private Image image;
+    private Image image, image_flipped;
     private int attackTimer;
     private boolean attacked;
+    private boolean face_left = false;
+
+    public Unit(Vector2f position, Image image) {
+        this.position = position;
+        this.image = image;
+        image_flipped = image.getFlippedCopy(true, false);
+    }
 
     public int getImageWidth() {
         return image.getWidth();
@@ -27,7 +34,9 @@ public class Unit {
     }
 
     public void renderImage(Graphics g, Camera camera) {
-
+        Image which_img;
+        which_img = this.face_left ? this.image_flipped : this.image;
+        which_img.drawCentered((int) position.getX(), (int) position.getY());
     }
 
     public void renderHealthbar(Graphics g, Camera camera) {
@@ -55,7 +64,8 @@ public class Unit {
     }
 
     public void render(Graphics g, Camera camera) {
-
+        this.renderImage(g, camera);
+        this.renderHealthbar(g, camera);
     }
 
     public void onDeath(World world) {
@@ -64,5 +74,19 @@ public class Unit {
 
     public void onAttacked() {
 
+    }
+
+    /**
+     * The x coordinate of the player (pixels).
+     */
+    public double getX() {
+        return position.getX();
+    }
+
+    /**
+     * The y coordinate of the player (pixels).
+     */
+    public double getY() {
+        return position.getY();
     }
 }

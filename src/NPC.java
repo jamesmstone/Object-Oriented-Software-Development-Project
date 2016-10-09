@@ -4,11 +4,16 @@
  */
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
 public class NPC extends Unit {
     private String text;
     private boolean talking;
+
+    public NPC(Vector2f position, Image image) {
+        super(position, image);
+    }
 
     public void update(int delta, World world) {
 
@@ -19,7 +24,7 @@ public class NPC extends Unit {
     }
 
     public void render(Graphics g, Camera camera) {
-
+        super.render(g, camera);
     }
 
     public String getText(int[] inventory) {

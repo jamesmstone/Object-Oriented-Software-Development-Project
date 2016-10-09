@@ -17,6 +17,8 @@ public class World {
     private static final int PLAYER_START_X = 756, PLAYER_START_Y = 684;
 
     private Player player = null;
+    private UnitManager units = null;
+    private final ItemManager items;
     private TiledMap map = null;
     private Camera camera = null;
 
@@ -51,11 +53,11 @@ public class World {
     /**
      * Create a new World object.
      */
-    public World()
-            throws SlickException {
+    public World() throws SlickException {
         map = new TiledMap(RPG.ASSETS_PATH + "/map.tmx", RPG.ASSETS_PATH);
-        player = new Player(RPG.ASSETS_PATH + "/units/player.png", PLAYER_START_X, PLAYER_START_Y);
-        camera = new Camera(player, RPG.SCREEN_WIDTH, RPG.SCREEN_HEIGHT);
+        units = new UnitManager();
+        items = new ItemManager();
+        camera = new Camera(units.getPlayer(), RPG.SCREEN_WIDTH, RPG.SCREEN_HEIGHT);
     }
 
     /**
@@ -67,8 +69,9 @@ public class World {
      */
     public void update(int dir_x, int dir_y, int delta)
             throws SlickException {
-        player.move(this, dir_x, dir_y, delta);
+        units.getPlayer().move(this, dir_x, dir_y, delta);
         camera.update();
+        units.update(delta, this);
     }
 
     /**
@@ -90,8 +93,11 @@ public class World {
         // Translate the Graphics object
         g.translate(-camera.getMinX(), -camera.getMinY());
 
-        // Render the player
-        player.render(g, camera.getxPos(), camera.getyPos());
+        // Render the Units
+        units.render(g, camera);
+        // Render the Items
+        items.render(camera);
+
     }
 
     /**

@@ -7,51 +7,20 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 /**
  * The character which the user plays as.
  */
 public class Player extends Unit {
-    private Image img = null;
-    private Image img_flipped = null;
-
-    // In pixels
-    private double x, y;
-    private double width, height;
-    private boolean face_left = false;
-
     // Pixels per millisecond
-    private static final double SPEED = 0.25;
+    private static final double speed = 0.25;
 
-    /**
-     * The x coordinate of the player (pixels).
-     */
-    public double getX() {
-        return x;
+    public Player(Vector2f location) throws SlickException {
+        super(location, new Image(RPG.ASSETS_PATH + "/units/player.png"));
     }
 
-    /**
-     * The y coordinate of the player (pixels).
-     */
-    public double getY() {
-        return y;
-    }
-
-    /**
-     * Creates a new Player.
-     *
-     * @param image_path Path of player's image file.
-     * @param x          The Player's starting x location in pixels.
-     * @param y          The Player's starting y location in pixels.
-     */
-    public Player(String image_path, double x, double y)
-            throws SlickException {
-        img = new Image(image_path);
-        img_flipped = img.getFlippedCopy(true, false);
-        this.x = x;
-        this.y = y;
-        this.width = img.getWidth();
-        this.height = img.getHeight();
+    public void update(int delta, World world) {
     }
 
     /**
@@ -65,42 +34,20 @@ public class Player extends Unit {
      * @param delta Time passed since last frame (milliseconds).
      */
     public void move(World world, double dir_x, double dir_y, double delta) {
-        // Update player facing based on X direction
-        if (dir_x > 0)
-            this.face_left = false;
-        else if (dir_x < 0)
-            this.face_left = true;
-
-        // Move the player by dir_x, dir_y, as a multiple of delta * speed
-        double new_x = this.x + dir_x * delta * SPEED;
-        double new_y = this.y + dir_y * delta * SPEED;
-
-        // Move in x first
-        double x_sign = Math.signum(dir_x);
-        if (!world.terrainBlocks(new_x + x_sign * width / 2, this.y + height / 2)
-                && !world.terrainBlocks(new_x + x_sign * width / 2, this.y - height / 2)) {
-            this.x = new_x;
+        float x = (float) (delta * speed * dir_x);
+        float y = (float) (delta * speed * dir_y);
+        if (x != 0 || y != 0) {
+            super.move(world, new Vector2f(x, y));
         }
-
-        // Then move in y
-        double y_sign = Math.signum(dir_y);
-        if (!world.terrainBlocks(this.x + width / 2, new_y + y_sign * height / 2)
-                && !world.terrainBlocks(this.x - width / 2, new_y + y_sign * height / 2)) {
-            this.y = new_y;
-        }
-
     }
 
     /**
      * Draw the player to the screen at the correct place.
      *
-     * @param g     The current Graphics context.
-     * @param cam_x Camera x position in pixels.
-     * @param cam_y Camera y position in pixels.
+     * @param g      The current Graphics context.
+     * @param camera The camera
      */
-    public void render(Graphics g, int cam_x, int cam_y) {
-        Image which_img;
-        which_img = this.face_left ? this.img_flipped : this.img;
-        which_img.drawCentered((int) x, (int) y);
+    public void render(Graphics g, Camera camera) {
+        super.render(g, camera);
     }
 }
