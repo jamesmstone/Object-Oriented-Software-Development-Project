@@ -12,8 +12,8 @@ public class Monster extends Unit {
 
     private float speed;
 
-    public Monster(Vector2f position, Image image) {
-        super(position, image);
+    public Monster(Vector2f position, Image image, Stats stats) {
+        super(position, image, stats);
     }
 
     public void render(Graphics g, Camera camera) {

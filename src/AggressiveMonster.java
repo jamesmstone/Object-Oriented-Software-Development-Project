@@ -10,8 +10,8 @@ public class AggressiveMonster extends Monster {
 
     private float speed = (float) 0.25;
 
-    public AggressiveMonster(Vector2f position, Image image) {
-        super(position, image);
+    public AggressiveMonster(Vector2f position, Image image, Stats stats) {
+        super(position, image, stats);
     }
 
     public void update(int delta, World world) {
