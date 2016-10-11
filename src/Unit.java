@@ -3,6 +3,7 @@
  * Author: James Stone <stone1> 761353
  */
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
@@ -71,6 +72,45 @@ public class Unit {
     }
 
     public void renderHealthbar(Graphics g, Camera camera) {
+        // Panel colours
+        Color LABEL  = new Color(0.9f, 0.9f, 0.4f);            // Gold
+        Color VALUE  = new Color(1.0f, 1.0f, 1.0f);            // White
+        Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.8f);      // Black, transp
+        Color BAR    = new Color(0.8f, 0.0f, 0.0f, 0.8f);      // Red, transp
+
+        // Variables for layout
+        String text;                   // Text to display
+        int    text_x, text_y;         // Coordinates to draw text
+        int    bar_x, bar_y;           // Coordinates to draw rectangles
+        int    bar_width, bar_height;  // Size of rectangle to draw
+        int    hp_bar_width;           // Size of red (HP) rectangle
+
+        Stats  unitStats = this.getStats();
+
+        float health_percent;       // Player's health, as a percentage
+
+        bar_width = 90;
+        bar_height = 30;
+
+        // Display the player's health bar
+        g.setColor(LABEL);
+        text = unitStats.getHp() + "/" + unitStats.getMaxHP();
+
+        bar_x = (int) position.getX() - bar_width /2 ;
+        bar_y = (int) (position.getY() - this.getImageHeight()/2 - bar_height);
+
+        text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
+        text_y = bar_y + (bar_height - g.getFont().getLineHeight()) / 2;
+
+        health_percent = unitStats.getHp() / unitStats.getMaxHP();
+        hp_bar_width = (int) (bar_width * health_percent);
+
+        g.setColor(BAR_BG);
+        g.fillRect(bar_x, bar_y, bar_width, bar_height);
+        g.setColor(BAR);
+        g.fillRect(bar_x, bar_y, hp_bar_width, bar_height);
+        g.setColor(VALUE);
+        g.drawString(text, text_x, text_y);
 
     }
 
