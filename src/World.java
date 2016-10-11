@@ -99,6 +99,7 @@ public class World {
         items.render(camera);
 
         // Render Panel
+        g.translate(+camera.getMinX(), +camera.getMinY());
         this.renderPanel(g);
 
     }
@@ -131,9 +132,9 @@ public class World {
      */
     public void renderPanel(Graphics g) {
         // Panel colours
-        Color LABEL  = new Color(0.9f, 0.9f, 0.4f);          // Gold
-        Color VALUE  = new Color(1.0f, 1.0f, 1.0f);          // White
-        Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.8f);   // Black, transp
+        Color LABEL  = new Color(0.9f, 0.9f, 0.4f);            // Gold
+        Color VALUE  = new Color(1.0f, 1.0f, 1.0f);            // White
+        Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.8f);      // Black, transp
         Color BAR    = new Color(0.8f, 0.0f, 0.0f, 0.8f);      // Red, transp
 
         // Variables for layout
@@ -202,10 +203,9 @@ public class World {
         inv_x = 490;
         inv_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT
                 + ((RPG.PANEL_HEIGHT - 72) / 2);
-        for (int item : player.getInventory())                // TODO
-        {
+        for (int item : player.getInventory()) {
             // Render the item to (inv_x, inv_y)
-
+            // TODO
             inv_x += 72;
         }
     }
