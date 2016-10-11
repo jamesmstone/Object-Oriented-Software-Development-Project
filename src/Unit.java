@@ -135,8 +135,10 @@ public class Unit {
     }
 
     public void render(Graphics g, Camera camera) {
-        this.renderImage(g, camera);
-        this.renderHealthbar(g, camera);
+        if(onScreen(camera)) {
+            this.renderImage(g, camera);
+            this.renderHealthbar(g, camera);
+        }
     }
 
     public void onDeath(World world) {
@@ -163,5 +165,10 @@ public class Unit {
 
     public Stats getStats() {
         return stats;
+    }
+
+    public boolean onScreen(Camera cam) {
+        return cam.getMinX() <= getX() && getX() <= cam.getMaxX() &&
+                cam.getMinY() <= getY() && getY() <= cam.getMaxY();
     }
 }
