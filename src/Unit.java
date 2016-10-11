@@ -8,15 +8,15 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Unit {
-    private Stats    stats;
+    private Stats stats;
     private Vector2f position;
-    private String   name;
+    private String name;
 
     private Image image;
     private Image image_flipped;
 
     private boolean attacked;
-    private int     attackTimer;
+    private int attackTimer;
 
     private boolean face_left = false;
 
@@ -37,22 +37,22 @@ public class Unit {
     }
 
     public void move(World world, Vector2f dx) {
-        Vector2f newPos = position.add(dx);
+        Vector2f newPos = position.copy().add(dx);
 
         double new_x = newPos.getX();
         double new_y = newPos.getY();
 
         // Move in x first
         double x_sign = Math.signum(dx.getX());
-        if (!world.terrainBlocks(new_x + x_sign * getImageWidth() / 2, position.getY() + getImageHeight() / 2) &&
-                !world.terrainBlocks(new_x + x_sign * getImageWidth() / 2, position.getY() - getImageHeight() / 2)) {
+        if (!world.terrainBlocks(new_x + x_sign * getImageWidth() / 4, position.getY() + getImageHeight() / 4) &&
+                !world.terrainBlocks(new_x + x_sign * getImageWidth() / 4, position.getY() - getImageHeight() / 4)) {
             position.set((float) new_x, position.getY());
         }
 
         // Then move in y
         double y_sign = Math.signum(dx.getY());
-        if (!world.terrainBlocks(position.getX() + getImageWidth() / 2, new_y + y_sign * getImageHeight() / 2) &&
-                !world.terrainBlocks(position.getX() - getImageWidth() / 2, new_y + y_sign * getImageHeight() / 2)) {
+        if (!world.terrainBlocks(position.getX() + getImageWidth() / 4, new_y + y_sign * getImageHeight() / 4) &&
+                !world.terrainBlocks(position.getX() - getImageWidth() / 4, new_y + y_sign * getImageHeight() / 4)) {
             position.set(position.getX(), (float) new_y);
         }
 
