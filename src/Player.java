@@ -9,24 +9,39 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The character which the user plays as.
  */
 public class Player extends Unit {
-    private static final double                  speed     = 0.25; // Pixels per millisecond
-    public               org.newdawn.slick.Image panel     = new Image(RPG.ASSETS_PATH + "/panel.png");
-    private              int[]                   inventory = new int[]{};
+    private static final double                  speed              = 0.25; // Pixels per millisecond
+    public static final  int                     attackDistance     = 50 ; //pixels todo
+    public static final  int                     itemPickupDistance = 50; //pixels todo
+    public               org.newdawn.slick.Image panel              = new Image(RPG.ASSETS_PATH + "/panel.png");
+    private              List<Item>              inventory          = new ArrayList<Item>();
 
     public static final int initialCooldown = 600;
     public static final int initialDamage   = 26;
     public static final int initialMaxHP    = 100;
     public static final int initialHP       = 100;
 
-    public Player(Vector2f location) throws SlickException {
-        super(location, new Image(RPG.ASSETS_PATH + "/units/player.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
+    private Vector2f initialPosition;
+
+    public Player(Vector2f position) throws SlickException {
+        super(position, new Image(RPG.ASSETS_PATH + "/units/player.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
+        initialPosition = position.copy();
     }
 
     public void update(int delta, World world) {
+        List<Item> nearbyItems = world.getItemManager().getItemsNear(getPosition(), itemPickupDistance);
+        inventory.addAll(nearbyItems);
+        for (Item item : nearbyItems) {
+            world.getItemManager().removeItem(item);
+            item.onPickup(getStats());
+        }
+        super.update(delta, world);
     }
 
     /**
@@ -57,7 +72,12 @@ public class Player extends Unit {
         super.render(g, camera);
     }
 
-    public int[] getInventory() {
+    public List<Item> getInventory() {
         return inventory;
+    }
+
+    public void onDeath(World world) {
+        heal();
+//        getPosition().set(initialPosition);
     }
 }

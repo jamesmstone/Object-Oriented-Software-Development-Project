@@ -8,16 +8,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Unit {
-    private Stats stats;
+public abstract class Unit {
+    private Stats    stats;
     private Vector2f position;
-    private String name;
 
     private Image image;
     private Image image_flipped;
 
-    private boolean attacked;
-    private int attackTimer;
+    private int attackTimer = 0;
 
     private boolean face_left = false;
 
@@ -37,41 +35,41 @@ public class Unit {
         return image.getHeight();
     }
 
-    public void move(World world, Vector2f dx) {
-        Vector2f newPos = position.copy().add(dx);
+    public void move(World world, Vector2f dPos) {
+        Vector2f newPos = getPosition().add(dPos);
 
         double new_x = newPos.getX();
         double new_y = newPos.getY();
 
         // Move in x first
-        double x_sign = Math.signum(dx.getX());
-        if (!world.terrainBlocks(new_x + x_sign * getImageWidth() / 4, position.getY() + getImageHeight() / 4) &&
-                !world.terrainBlocks(new_x + x_sign * getImageWidth() / 4, position.getY() - getImageHeight() / 4)) {
-            position.set((float) new_x, position.getY());
+        double x_sign = Math.signum(dPos.getX());
+        if (!world.terrainBlocks(new_x + x_sign * getImageWidth() / 4, getPosition().getY() + getImageHeight() / 4) &&
+                !world.terrainBlocks(new_x + x_sign * getImageWidth() / 4, getPosition().getY() - getImageHeight() / 4)) {
+            position.set((float) new_x, getPosition().getY());
         }
 
         // Then move in y
-        double y_sign = Math.signum(dx.getY());
-        if (!world.terrainBlocks(position.getX() + getImageWidth() / 4, new_y + y_sign * getImageHeight() / 4) &&
-                !world.terrainBlocks(position.getX() - getImageWidth() / 4, new_y + y_sign * getImageHeight() / 4)) {
-            position.set(position.getX(), (float) new_y);
+        double y_sign = Math.signum(dPos.getY());
+        if (!world.terrainBlocks(getPosition().getX() + getImageWidth() / 4, new_y + y_sign * getImageHeight() / 4) &&
+                !world.terrainBlocks(getPosition().getX() - getImageWidth() / 4, new_y + y_sign * getImageHeight() / 4)) {
+            position.set(getPosition().getX(), (float) new_y);
         }
 
         // update unit direction
-        if (dx.getX() > 0) {
+        if (dPos.getX() > 0) {
             this.face_left = false;
-        } else if (dx.getX() < 0) {
+        } else if (dPos.getX() < 0) {
             this.face_left = true;
         }
     }
 
-    public void renderImage(Graphics g, Camera camera) {
+    private void renderImage(Graphics g, Camera camera) {
         Image which_img;
         which_img = this.face_left ? this.image_flipped : this.image;
-        which_img.drawCentered((int) position.getX(), (int) position.getY());
+        which_img.drawCentered((int) getPosition().getX(), (int) getPosition().getY());
     }
 
-    public void renderHealthbar(Graphics g, Camera camera) {
+    private void renderHealthbar(Graphics g, Camera camera) {
         // Panel colours
         Color LABEL  = new Color(0.9f, 0.9f, 0.4f);            // Gold
         Color VALUE  = new Color(1.0f, 1.0f, 1.0f);            // White
@@ -85,7 +83,7 @@ public class Unit {
         int    bar_width, bar_height;  // Size of rectangle to draw
         int    hp_bar_width;           // Size of red (HP) rectangle
 
-        Stats  unitStats = this.getStats();
+        Stats unitStats = this.getStats();
 
         float health_percent;       // Player's health, as a percentage
 
@@ -96,13 +94,13 @@ public class Unit {
         g.setColor(LABEL);
         text = unitStats.getHp() + "/" + unitStats.getMaxHP();
 
-        bar_x = (int) position.getX() - bar_width /2 ;
-        bar_y = (int) (position.getY() - this.getImageHeight()/2 - bar_height);
+        bar_x = (int) getPosition().getX() - bar_width / 2;
+        bar_y = (int) (getPosition().getY() - this.getImageHeight() / 2 - bar_height);
 
         text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
         text_y = bar_y + (bar_height - g.getFont().getLineHeight()) / 2;
 
-        health_percent = unitStats.getHp() / unitStats.getMaxHP();
+        health_percent = (float) unitStats.getHp() / unitStats.getMaxHP();
         hp_bar_width = (int) (bar_width * health_percent);
 
         g.setColor(BAR_BG);
@@ -115,48 +113,51 @@ public class Unit {
     }
 
     public void attack(World world, Unit target) {
+        if (attackTimer == 0) {
+            //attack
+            target.onAttacked((int) (stats.getMaxDamage() * Math.random()));
 
+            //update attackTimer
+            attackTimer = stats.getCooldown();
+        }
     }
 
     public void heal() {
-
-    }
-
-    public void updateUnit(int delta, World world) {
-
+        stats.resetHP();
     }
 
     public void update(int delta, World world) {
-
+        attackTimer = (attackTimer > 0 ? attackTimer - delta : 0);
+        if (stats.getHp() <= 0) {
+            onDeath(world);
+        }
     }
 
     public void render(Graphics g, Camera camera) {
-        if(onScreen(camera)) {
+        if (onScreen(camera)) {
             this.renderImage(g, camera);
             this.renderHealthbar(g, camera);
         }
     }
 
-    public void onDeath(World world) {
+    public abstract void onDeath(World world);
 
-    }
-
-    public void onAttacked() {
-
+    public void onAttacked(int damage) {
+        stats.reduceHP(damage);
     }
 
     /**
      * The x coordinate of the player (pixels).
      */
     public double getX() {
-        return position.getX();
+        return getPosition().getX();
     }
 
     /**
      * The y coordinate of the player (pixels).
      */
     public double getY() {
-        return position.getY();
+        return getPosition().getY();
     }
 
     public Stats getStats() {
@@ -167,4 +168,15 @@ public class Unit {
         return cam.getMinX() <= getX() && getX() <= cam.getMaxX() &&
                 cam.getMinY() <= getY() && getY() <= cam.getMaxY();
     }
+
+    public float distanceFromPoint(Vector2f point) {
+        return getPosition().distance(point);
+    }
+    public boolean near(Vector2f point, float dist){
+        return distanceFromPoint(point) < dist;
+    }
+    public Vector2f getPosition() {
+        return position.copy();
+    }
+
 }

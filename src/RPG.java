@@ -67,6 +67,9 @@ public class RPG extends BasicGame {
         // Get data about the current input (keyboard state).
         Input input = gc.getInput();
 
+        boolean attack = input.isKeyDown(Input.KEY_A);
+        boolean talk   = input.isKeyDown(Input.KEY_T);
+
         // Update the player's movement direction based on keyboard presses.
         int dir_x = 0;
         int dir_y = 0;
@@ -80,7 +83,7 @@ public class RPG extends BasicGame {
             dir_x += 1;
 
         // Let World.update decide what to do with this data.
-        world.update(dir_x, dir_y, delta);
+        world.update(dir_x, dir_y, attack, talk, delta);
     }
 
     /**
@@ -105,7 +108,7 @@ public class RPG extends BasicGame {
         System.setProperty("org.newdawn.slick.pngloader", "false"); // http://gamedev.stackexchange.com/a/44845/91047
         AppGameContainer app = new AppGameContainer(new RPG());
         app.setShowFPS(true); // to show frames-per-second.
-        app.setTargetFrameRate(30);
+        app.setTargetFrameRate(30); // // TODO
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }

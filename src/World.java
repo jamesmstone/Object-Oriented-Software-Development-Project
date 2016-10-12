@@ -7,6 +7,7 @@
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
@@ -63,15 +64,17 @@ public class World {
     /**
      * Update the game state for a frame.
      *
-     * @param dir_x The player's movement in the x axis (-1, 0 or 1).
-     * @param dir_y The player's movement in the y axis (-1, 0 or 1).
-     * @param delta Time passed since last frame (milliseconds).
+     * @param dir_x  The player's movement in the x axis (-1, 0 or 1).
+     * @param dir_y  The player's movement in the y axis (-1, 0 or 1).
+     * @param attack Whether the player wishes to attack
+     * @param talk   Whether the player wishes to talk
+     * @param delta  Time passed since last frame (milliseconds).
      */
-    public void update(int dir_x, int dir_y, int delta)
+    public void update(int dir_x, int dir_y, boolean attack, boolean talk, int delta)
             throws SlickException {
         units.getPlayer().move(this, dir_x, dir_y, delta);
         camera.update();
-        units.update(delta, this);
+        units.update(attack, talk, delta, this);
     }
 
     /**
@@ -96,7 +99,7 @@ public class World {
         // Render the Units
         units.render(g, camera);
         // Render the Items
-        items.render(camera);
+        items.render(g, camera);
 
         // Render Panel
         g.translate(+camera.getMinX(), +camera.getMinY());
@@ -164,7 +167,7 @@ public class World {
         bar_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT + 20;
         bar_width = 90;
         bar_height = 30;
-        health_percent = playerStats.getHp() / playerStats.getMaxHP();
+        health_percent = (float) playerStats.getHp() / playerStats.getMaxHP();
         hp_bar_width = (int) (bar_width * health_percent);
         text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
         g.setColor(BAR_BG);
@@ -203,10 +206,18 @@ public class World {
         inv_x = 490;
         inv_y = RPG.SCREEN_HEIGHT - RPG.PANEL_HEIGHT
                 + ((RPG.PANEL_HEIGHT - 72) / 2);
-        for (int item : player.getInventory()) {
+        for (Item item : player.getInventory()) {
             // Render the item to (inv_x, inv_y)
-            // TODO
+            item.render(camera, new Vector2f(inv_x, inv_y));
             inv_x += 72;
         }
+    }
+
+    public ItemManager getItemManager() {
+        return items;
+    }
+
+    public UnitManager getUnitManager() {
+        return units;
     }
 }
