@@ -56,7 +56,7 @@ public class UnitManager {
     }
 
     public Player getPlayer() {
-        return player; // todo
+        return player;
     }
 
     private void load() {
