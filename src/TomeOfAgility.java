@@ -11,7 +11,7 @@ public class TomeOfAgility extends Item {
     private static final int efectOnHp        = 0;
     private static final int efectOnMaxHP     = 0;
     private static final int efectOnMaxDamage = 0;
-    private static final int efectOnCooldown  = 0;
+    private static final int efectOnCooldown  = -300;
 
     TomeOfAgility(Vector2f position) throws SlickException {
         super(new Image(RPG.ASSETS_PATH + "/items/tome.png"), position);

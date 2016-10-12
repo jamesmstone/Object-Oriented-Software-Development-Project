@@ -35,8 +35,8 @@ public class Stats {
 
     public void modify(Stats statsToAdd){
         this.cooldown += statsToAdd.cooldown;
-        this.maxDamage =+ statsToAdd.maxDamage;
-        this.maxHP =+ statsToAdd.maxHP;
-        this.hp =+ statsToAdd.hp;
+        this.maxDamage += statsToAdd.maxDamage;
+        this.maxHP += statsToAdd.maxHP;
+        this.hp += statsToAdd.hp;
     }
 }

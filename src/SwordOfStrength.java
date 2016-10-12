@@ -10,7 +10,7 @@ public class SwordOfStrength extends Item {
 
     private static final int efectOnHp        = 0;
     private static final int efectOnMaxHP     = 0;
-    private static final int efectOnMaxDamage = 0;
+    private static final int efectOnMaxDamage = 30;
     private static final int efectOnCooldown  = 0;
 
     SwordOfStrength(Vector2f position) throws SlickException {

@@ -8,8 +8,8 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public class AmuletOfVitalitiy extends Item {
 
-    private static final int efectOnHp        = 0;
-    private static final int efectOnMaxHP     = 0;
+    private static final int efectOnHp        = 80;
+    private static final int efectOnMaxHP     = 80;
     private static final int efectOnMaxDamage = 0;
     private static final int efectOnCooldown  = 0;
 
