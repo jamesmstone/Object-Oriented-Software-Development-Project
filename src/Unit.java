@@ -122,10 +122,6 @@ public class Unit {
 
     }
 
-    public void getBuffs() {
-
-    }
-
     public void updateUnit(int delta, World world) {
 
     }

@@ -15,7 +15,7 @@ public class Item {
         return ID;
     }
 
-    public void onPickup(BuffState buffs) {
+    public void onPickup(Stats stats) {
 
     }
 

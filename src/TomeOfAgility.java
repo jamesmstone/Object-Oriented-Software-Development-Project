@@ -7,7 +7,7 @@ public class TomeOfAgility extends Item {
         return 3;
     }
 
-    public TomeOfAgility(BuffState buffs) {
+    public TomeOfAgility(Stats stats) {
 
     }
 }

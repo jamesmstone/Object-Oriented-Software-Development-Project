@@ -7,7 +7,7 @@ public class SwordOfStrength extends Item {
         return 2;
     }
 
-    public void onPickup(BuffState buffs) {
+    public void onPickup(Stats stats) {
 
     }
 }

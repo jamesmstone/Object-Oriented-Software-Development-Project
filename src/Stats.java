@@ -14,7 +14,7 @@ public class Stats {
     }
 
     public void resetHP() {
-        hp = initialHp;
+        hp = maxHP;
     }
 
     public int getCooldown() {
@@ -31,5 +31,12 @@ public class Stats {
 
     public int getHp() {
         return hp;
+    }
+
+    public void modify(Stats statsToAdd){
+        this.cooldown += statsToAdd.cooldown;
+        this.maxDamage =+ statsToAdd.maxDamage;
+        this.maxHP =+ statsToAdd.maxHP;
+        this.hp =+ statsToAdd.hp;
     }
 }

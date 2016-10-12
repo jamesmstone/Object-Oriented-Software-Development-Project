@@ -7,7 +7,7 @@ public class AmuletOfVitalitiy extends Item {
         return 0;
     }
 
-    public void onPickup(BuffState buffs) {
+    public void onPickup(Stats stats) {
 
     }
 }

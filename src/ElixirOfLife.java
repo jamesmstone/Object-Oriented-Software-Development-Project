@@ -7,7 +7,7 @@ public class ElixirOfLife extends Item {
         return 1;
     }
 
-    public ElixirOfLife(BuffState buffs) {
+    public ElixirOfLife(Stats stats) {
 
     }
 }
