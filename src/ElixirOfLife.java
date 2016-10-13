@@ -18,6 +18,7 @@ public class ElixirOfLife extends Item {
 
     public void onPickup(Stats playerStats) {
         playerStats.modify(new Stats(efectOnCooldown, efectOnMaxDamage, efectOnMaxHP, efectOnHp));
+        System.exit(0); // You Win, end game //// TODO
     }
 
 }

@@ -9,7 +9,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Monster extends Unit {
+abstract public class Monster extends Unit {
 
 
     public static final float attackDistance = 50; // distance (pxs) at which monster attacks

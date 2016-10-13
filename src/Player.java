@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Player extends Unit {
     private static final double                  speed              = 0.25; // Pixels per millisecond
-    public static final  int                     attackDistance     = 50 ; //pixels todo
+    public static final  int                     attackDistance     = 50; //pixels todo
     public static final  int                     itemPickupDistance = 50; //pixels todo
     public               org.newdawn.slick.Image panel              = new Image(RPG.ASSETS_PATH + "/panel.png");
     private              List<Item>              inventory          = new ArrayList<Item>();
@@ -78,6 +78,15 @@ public class Player extends Unit {
 
     public void onDeath(World world) {
         heal();
-//        getPosition().set(initialPosition);
+        getPosition().set(initialPosition);
+    }
+
+    public boolean hasItem(Class itemName) {
+        for (Item item : inventory) {
+            if (itemName.isInstance(item)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PassiveMonster extends Monster {
+abstract public class PassiveMonster extends Monster {
 
     private int attackedTime;
     private int moveTime;

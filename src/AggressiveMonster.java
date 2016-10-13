@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class AggressiveMonster extends Monster {
+abstract public class AggressiveMonster extends Monster {
 
     private       float speed                = (float) 0.25;
     private final int   tooFarWalkDistance   = 150; // px

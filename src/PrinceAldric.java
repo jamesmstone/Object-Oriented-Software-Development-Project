@@ -7,6 +7,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
+import java.util.List;
+
 public class PrinceAldric extends NPC {
     public static final int initialCooldown = 0;
     public static final int initialDamage   = 0;
@@ -17,8 +19,13 @@ public class PrinceAldric extends NPC {
         super(position, new Image(RPG.ASSETS_PATH + "/units/prince.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
     }
 
-    public String getText(int[] inventory) {
-        return ""; // todo
+    @Override
+    public String getText(Player player) {
+        for (Item item :player.getInventory()) {
+            if(item instanceof ElixirOfLife){
+                return "The elixir! My father is cured! Thank you!";
+            }
+        }
+        return "Please seek out the Elixir of Life to cure the king.";
     }
-
 }

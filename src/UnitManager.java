@@ -27,7 +27,7 @@ public class UnitManager {
     public void update(boolean playerAttack, boolean playerTalk, int delta, World world) {
         Vector2f playerPosition = getPlayer().getPosition();
 
-
+        player.update(delta, world);
         for (Monster monster : monsters) {
             monster.update(delta, world);
             if (playerAttack && monster.distanceFromPoint(playerPosition) <= Player.attackDistance) {
@@ -43,7 +43,7 @@ public class UnitManager {
             npc.update(player, playerTalk, delta, world);
         }
 
-        player.update(delta, world);
+
 
     }
 
