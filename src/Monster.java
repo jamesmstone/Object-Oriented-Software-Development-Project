@@ -7,13 +7,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 abstract public class Monster extends Unit {
 
 
-    public static final float attackDistance = 50; // distance (pxs) at which monster attacks
-
+    public static final float ATTACK_DISTANCE = 50; // distance (pxs) at which monster attacks
+    abstract public float getSpeed();
     public Monster(Vector2f position, Image image, Stats stats) {
         super(position, image, stats);
     }
@@ -30,36 +28,16 @@ abstract public class Monster extends Unit {
         world.getUnitManager().removeMonster(this);
     }
 
-    public Vector2f getDirection(float direction) {
+    public Vector2f getDirectionToPlayer(Vector2f playerPosition) {
 
-
-        if (direction <= 22.5) {
-            // Right
-            return new Vector2f(1, 0);
-        } else if (direction <= 67.5) {
-            // Up-Right
-            return new Vector2f(1, -1);
-        } else if (direction <= 112.5) {
-            // Up
-            return new Vector2f(0, -1);
-        } else if (direction <= 157.5) {
-            // Up-Left
-            return new Vector2f(-1, -1);
-        } else if (direction <= 202.5) {
-            // Left
-            return new Vector2f(-1, 0);
-        } else if (direction <= 247.5) {
-            // Down-Left
-            return new Vector2f(-1, 1);
-        } else if (direction <= 292.5) {
-            // Down
-            return new Vector2f(0, 1);
-        } else if (direction <= 337.5) {
-            // Down-Right
-            return new Vector2f(1, 1);
-        } else {
-            // Right
-            return new Vector2f(1, 0);
-        }
+        float    amount        = getSpeed();
+        float    distance      = playerPosition.distance(getPosition());
+        Vector2f vectorBetween = playerPosition.sub(getPosition());
+        float    x             = vectorBetween.getX() / distance * amount;
+        float    y             = vectorBetween.getY() / distance * amount;
+        return new Vector2f(x, y);
+    }
+    public Vector2f getDirectionFromPlayer(Vector2f playerPosition){
+        return getDirectionToPlayer(playerPosition).negate();
     }
 }

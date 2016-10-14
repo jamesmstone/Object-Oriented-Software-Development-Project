@@ -16,26 +16,26 @@ import java.util.List;
  * The character which the user plays as.
  */
 public class Player extends Unit {
-    private static final double                  speed              = 0.25; // Pixels per millisecond
-    public static final  int                     attackDistance     = 50; //pixels todo
-    public static final  int                     itemPickupDistance = 50; //pixels todo
-    public               org.newdawn.slick.Image panel              = new Image(RPG.ASSETS_PATH + "/panel.png");
-    private              List<Item>              inventory          = new ArrayList<Item>();
+    private static final double                  SPEED                = 0.25; // Pixels per millisecond
+    public static final  int                     ATTACK_DISTANCE      = 50; //pixels todo
+    public static final  int                     ITEM_PICKUP_DISTANCE = 50; //pixels todo
+    public               org.newdawn.slick.Image panel                = new Image(RPG.ASSETS_PATH + "/panel.png");
+    private              List<Item>              inventory            = new ArrayList<Item>();
 
-    public static final int initialCooldown = 600;
-    public static final int initialDamage   = 26;
-    public static final int initialMaxHP    = 100;
-    public static final int initialHP       = 100;
+    public static final int INITIAL_COOLDOWN = 600;
+    public static final int INITIAL_DAMAGE   = 26;
+    public static final int INITIAL_MAX_HP   = 100;
+    public static final int INITIAL_HP       = 100;
 
     private Vector2f initialPosition;
 
     public Player(Vector2f position) throws SlickException {
-        super(position, new Image(RPG.ASSETS_PATH + "/units/player.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
+        super(position, new Image(RPG.ASSETS_PATH + "/units/player.png"), new Stats(INITIAL_COOLDOWN, INITIAL_DAMAGE, INITIAL_MAX_HP, INITIAL_HP));
         initialPosition = position.copy();
     }
 
     public void update(int delta, World world) {
-        List<Item> nearbyItems = world.getItemManager().getItemsNear(getPosition(), itemPickupDistance);
+        List<Item> nearbyItems = world.getItemManager().getItemsNear(getPosition(), ITEM_PICKUP_DISTANCE);
         inventory.addAll(nearbyItems);
         for (Item item : nearbyItems) {
             world.getItemManager().removeItem(item);
@@ -55,8 +55,8 @@ public class Player extends Unit {
      * @param delta Time passed since last frame (milliseconds).
      */
     public void move(World world, double dir_x, double dir_y, double delta) {
-        float x = (float) (delta * speed * dir_x);
-        float y = (float) (delta * speed * dir_y);
+        float x = (float) (delta * SPEED * dir_x);
+        float y = (float) (delta * SPEED * dir_y);
         if (x != 0 || y != 0) {
             super.move(world, new Vector2f(x, y));
         }
@@ -78,7 +78,7 @@ public class Player extends Unit {
 
     public void onDeath(World world) {
         heal();
-        getPosition().set(initialPosition);
+        this.setPosition(initialPosition);
     }
 
     public boolean hasItem(Class itemName) {

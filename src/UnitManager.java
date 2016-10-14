@@ -9,7 +9,6 @@ import org.newdawn.slick.geom.Vector2f;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,10 +29,11 @@ public class UnitManager {
         player.update(delta, world);
         for (Monster monster : monsters) {
             monster.update(delta, world);
-            if (playerAttack && monster.distanceFromPoint(playerPosition) <= Player.attackDistance) {
+            if (playerAttack && monster.distanceFromPoint(playerPosition) <= Player.ATTACK_DISTANCE) {
                 player.attack(world, monster);
             }
-            if (monster.distanceFromPoint(playerPosition) <= Monster.attackDistance) {
+            if (monster instanceof AggressiveMonster &&
+                    monster.distanceFromPoint(playerPosition) <= Monster.ATTACK_DISTANCE) {
                 monster.attack(world, player);
             }
         }

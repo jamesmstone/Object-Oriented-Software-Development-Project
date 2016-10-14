@@ -7,18 +7,17 @@ import org.newdawn.slick.geom.Vector2f;
  * Author: James Stone 761353 stone1
  */
 public class ElixirOfLife extends Item {
-    private static final int efectOnHp        = 0;
-    private static final int efectOnMaxHP     = 0;
-    private static final int efectOnMaxDamage = 0;
-    private static final int efectOnCooldown  = 0;
+    private static final int EFECT_ON_HP         = 0;
+    private static final int EFECT_ON_MAX_HP     = 0;
+    private static final int EFECT_ON_MAX_DAMAGE = 0;
+    private static final int EFECT_ON_COOLDOWN   = 0;
 
     ElixirOfLife(Vector2f position) throws SlickException {
         super(new Image(RPG.ASSETS_PATH + "/items/elixir.png"), position);
     }
 
     public void onPickup(Stats playerStats) {
-        playerStats.modify(new Stats(efectOnCooldown, efectOnMaxDamage, efectOnMaxHP, efectOnHp));
-        System.exit(0); // You Win, end game //// TODO
+        playerStats.modify(new Stats(EFECT_ON_COOLDOWN, EFECT_ON_MAX_DAMAGE, EFECT_ON_MAX_HP, EFECT_ON_HP));
     }
 
 }

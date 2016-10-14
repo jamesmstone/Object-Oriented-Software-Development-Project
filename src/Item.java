@@ -11,6 +11,11 @@ abstract public class Item {
     private Vector2f position;
 
 
+    /**
+     * Generates an item, called by subclasses as abstract class
+     * @param image     an image representing the item
+     * @param position  the start position of the item in the world
+     */
     Item(Image image, Vector2f position) {
         this.image = image;
         this.position = position;
@@ -19,6 +24,10 @@ abstract public class Item {
 
     public abstract void onPickup(Stats playerStats);
 
+    /**
+     * Renders an item to the screen
+     * @param camera the camera
+     */
     public void render(Camera camera) {
         if (onScreen(camera)) {
             image.drawCentered((int) position.getX(), (int) position.getY());

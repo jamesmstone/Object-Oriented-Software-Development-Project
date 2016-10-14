@@ -8,16 +8,16 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public class SwordOfStrength extends Item {
 
-    private static final int efectOnHp        = 0;
-    private static final int efectOnMaxHP     = 0;
-    private static final int efectOnMaxDamage = 30;
-    private static final int efectOnCooldown  = 0;
+    private static final int EFECT_ON_HP         = 0;
+    private static final int EFECT_ON_MAX_HP     = 0;
+    private static final int EFECT_ON_MAX_DAMAGE = 30;
+    private static final int EFECT_ON_COOLDOWN   = 0;
 
     SwordOfStrength(Vector2f position) throws SlickException {
         super(new Image(RPG.ASSETS_PATH + "/items/sword.png"), position);
     }
 
     public void onPickup(Stats playerStats) {
-        playerStats.modify(new Stats(efectOnCooldown, efectOnMaxDamage, efectOnMaxHP, efectOnHp));
+        playerStats.modify(new Stats(EFECT_ON_COOLDOWN, EFECT_ON_MAX_DAMAGE, EFECT_ON_MAX_HP, EFECT_ON_HP));
     }
 }

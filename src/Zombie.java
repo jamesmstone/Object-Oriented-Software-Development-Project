@@ -8,13 +8,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Zombie extends AggressiveMonster {
-    public static final int initialCooldown = 800;
-    public static final int initialDamage   = 10;
-    public static final int initialMaxHP    = 60;
-    public static final int initialHP       = 60;
+    public static final int INITIAL_COOLDOWN = 800;
+    public static final int INITIAL_DAMAGE   = 10;
+    public static final int INITIAL_MAX_HP   = 60;
+    public static final int INITIAL_HP       = 60;
 
     public Zombie(Vector2f position) throws SlickException {
-        super(position, new Image(RPG.ASSETS_PATH + "/units/zombie.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
+        super(position, new Image(RPG.ASSETS_PATH + "/units/zombie.png"), new Stats(INITIAL_COOLDOWN, INITIAL_DAMAGE, INITIAL_MAX_HP, INITIAL_HP));
     }
 
 }

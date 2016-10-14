@@ -11,16 +11,25 @@ import java.util.List;
 
 public class Garth extends NPC {
 
-    public static final int initialCooldown = 0;
-    public static final int initialDamage   = 0;
-    public static final int initialMaxHP    = 1;
-    public static final int initialHP       = 1;
+    public static final int INITIAL_COOLDOWN = 0;
+    public static final int INITIAL_DAMAGE   = 0;
+    public static final int INITIAL_MAX_HP   = 1;
+    public static final int INITIAL_HP       = 1;
 
+    /**
+     * Generates Garth
+     * @param position starting position of Elvira
+     * @throws SlickException
+     */
     public Garth(Vector2f position) throws SlickException {
-        super(position, new Image(RPG.ASSETS_PATH + "/units/peasant.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
+        super(position, new Image(RPG.ASSETS_PATH + "/units/peasant.png"), new Stats(INITIAL_COOLDOWN, INITIAL_DAMAGE, INITIAL_MAX_HP, INITIAL_HP));
     }
 
-    @Override
+    /**
+     * The text to display
+     * @param player the player you are interacting with
+     * @return The text
+     */
     public String getText(Player player) {
         List<Item> playerInventory = player.getInventory();
 

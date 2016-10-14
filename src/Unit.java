@@ -179,4 +179,7 @@ public abstract class Unit {
         return position.copy();
     }
 
+    public void setPosition(Vector2f position) {
+        this.position = position;
+    }
 }

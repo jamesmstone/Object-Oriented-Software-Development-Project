@@ -8,16 +8,16 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public class TomeOfAgility extends Item {
 
-    private static final int efectOnHp        = 0;
-    private static final int efectOnMaxHP     = 0;
-    private static final int efectOnMaxDamage = 0;
-    private static final int efectOnCooldown  = -300;
+    private static final int EFECT_ON_HP         = 0;
+    private static final int EFECT_ON_MAX_HP     = 0;
+    private static final int EFECT_ON_MAX_DAMAGE = 0;
+    private static final int EFECT_ON_COOLDOWN   = -300;
 
     TomeOfAgility(Vector2f position) throws SlickException {
         super(new Image(RPG.ASSETS_PATH + "/items/tome.png"), position);
     }
 
     public void onPickup(Stats playerStats) {
-        playerStats.modify(new Stats(efectOnCooldown, efectOnMaxDamage, efectOnMaxHP, efectOnHp));
+        playerStats.modify(new Stats(EFECT_ON_COOLDOWN, EFECT_ON_MAX_DAMAGE, EFECT_ON_MAX_HP, EFECT_ON_HP));
     }
 }

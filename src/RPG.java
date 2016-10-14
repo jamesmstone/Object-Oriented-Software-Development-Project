@@ -107,8 +107,6 @@ public class RPG extends BasicGame {
             throws SlickException {
         System.setProperty("org.newdawn.slick.pngloader", "false"); // http://gamedev.stackexchange.com/a/44845/91047
         AppGameContainer app = new AppGameContainer(new RPG());
-        app.setShowFPS(true); // to show frames-per-second.
-        app.setTargetFrameRate(30); // // TODO
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }

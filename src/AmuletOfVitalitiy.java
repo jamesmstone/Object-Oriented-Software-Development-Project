@@ -8,16 +8,25 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public class AmuletOfVitalitiy extends Item {
 
-    private static final int efectOnHp        = 80;
-    private static final int efectOnMaxHP     = 80;
-    private static final int efectOnMaxDamage = 0;
-    private static final int efectOnCooldown  = 0;
+    private static final int EFECT_ON_HP         = 80;
+    private static final int EFECT_ON_MAX_HP     = 80;
+    private static final int EFECT_ON_MAX_DAMAGE = 0;
+    private static final int EFECT_ON_COOLDOWN   = 0;
 
-    AmuletOfVitalitiy(Vector2f position) throws SlickException {
+    /**
+     * Generates Amulet of Vitality
+     * @param position  The amulets location
+     * @throws SlickException
+     */
+    public AmuletOfVitalitiy(Vector2f position) throws SlickException {
         super(new Image(RPG.ASSETS_PATH + "/items/amulet.png"), position);
     }
 
+    /**
+     * On picking up what happens
+     * @param playerStats the players stats to modify
+     */
     public void onPickup(Stats playerStats) {
-        playerStats.modify(new Stats(efectOnCooldown, efectOnMaxDamage, efectOnMaxHP, efectOnHp));
+        playerStats.modify(new Stats(EFECT_ON_COOLDOWN, EFECT_ON_MAX_DAMAGE, EFECT_ON_MAX_HP, EFECT_ON_HP));
     }
 }

@@ -9,8 +9,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
 abstract public class NPC extends Unit {
-    private static final int   talkDistance  = 50; // distance (px) within which talking is acceptable
-    private static final float totalTalkTime = 4 * 1000; // time (ms) to chat for
+    private static final int   TALK_DISTANCE   = 50; // distance (px) within which talking is acceptable
+    private static final float TOTAL_TALK_TIME = 4 * 1000; // time (ms) to chat for
     private String text;
     private float  talkTime;
 
@@ -19,7 +19,7 @@ abstract public class NPC extends Unit {
     }
 
     public void update(Player player, boolean wannaTalk, int delta, World world) {
-        if (wannaTalk && distanceFromPoint(player.getPosition()) < NPC.talkDistance) {
+        if (wannaTalk && distanceFromPoint(player.getPosition()) < NPC.TALK_DISTANCE) {
             interact(player);
         }
         talkTime = talkTime > 0 ? talkTime - delta : 0;
@@ -28,7 +28,7 @@ abstract public class NPC extends Unit {
     }
 
     public void talk(Player player) {
-        talkTime = NPC.totalTalkTime;
+        talkTime = TOTAL_TALK_TIME;
         text = getText(player);
     }
 
