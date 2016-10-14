@@ -41,6 +41,11 @@ abstract public class Monster extends Unit {
         world.getUnitManager().removeMonster(this);
     }
 
+    /**
+     * gets a unit vector representing the direction of the player
+     * @param playerPosition
+     * @return
+     */
     public Vector2f getDirectionToPlayer(Vector2f playerPosition) {
 
         float    amount        = getSpeed();
@@ -50,6 +55,12 @@ abstract public class Monster extends Unit {
         float    y             = vectorBetween.getY() / distance * amount;
         return new Vector2f(x, y);
     }
+
+    /**
+     * gets a unit vector representing the opposite direction of the player
+     * @param playerPosition
+     * @return
+     */
     public Vector2f getDirectionFromPlayer(Vector2f playerPosition){
         return getDirectionToPlayer(playerPosition).negate();
     }

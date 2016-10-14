@@ -21,7 +21,11 @@ abstract public class PassiveMonster extends Monster {
         super(position, image, stats);
     }
 
-
+    /**
+     * Updates a Passive Monster
+     * @param delta how long since last update
+     * @param world the world where the monster is
+     */
     public void update(int delta, World world) {
         attackedTime = (attackedTime > 0 ? attackedTime - delta : 0);
         moveTime = (moveTime > 0 ? moveTime - delta : MOVE_FREQUENCY);

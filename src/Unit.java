@@ -142,6 +142,10 @@ public abstract class Unit {
 
     public abstract void onDeath(World world);
 
+    /**
+     * attack this unit
+     * @param damage the amount of damage to give to this unit
+     */
     public void onAttacked(int damage) {
         stats.reduceHP(damage);
     }
