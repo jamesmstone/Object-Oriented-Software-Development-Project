@@ -16,14 +16,27 @@ abstract public class Monster extends Unit {
         super(position, image, stats);
     }
 
+    /**
+     * Renders a Monster to the screen
+     * @param camera the camera
+     */
     public void render(Graphics g, Camera camera) {
         super.render(g, camera);
     }
 
+    /**
+     * Updates a Monster
+     * @param delta how long since last update
+     * @param world the world where the monster is
+     */
     public void update(int delta, World world) {
         super.update(delta,world);
     }
 
+    /**
+     * What happens when a Monster dies
+     * @param world the world the Monster dies in
+     */
     public void onDeath(World world) {
         world.getUnitManager().removeMonster(this);
     }

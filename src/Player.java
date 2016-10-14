@@ -34,6 +34,11 @@ public class Player extends Unit {
         initialPosition = position.copy();
     }
 
+    /**
+     * Updates a Player
+     * @param delta how long since last update
+     * @param world the world where the monster is
+     */
     public void update(int delta, World world) {
         List<Item> nearbyItems = world.getItemManager().getItemsNear(getPosition(), ITEM_PICKUP_DISTANCE);
         inventory.addAll(nearbyItems);
@@ -76,11 +81,20 @@ public class Player extends Unit {
         return inventory;
     }
 
+    /**
+     * What happens when a player dies
+     * @param world the world the player dies in
+     */
     public void onDeath(World world) {
         heal();
         this.setPosition(initialPosition);
     }
 
+    /**
+     * Checks if a player has an item
+     * @param itemName the class name of the item to check for
+     * @return true in the player has this item in its inventory
+     */
     public boolean hasItem(Class itemName) {
         for (Item item : inventory) {
             if (itemName.isInstance(item)) {

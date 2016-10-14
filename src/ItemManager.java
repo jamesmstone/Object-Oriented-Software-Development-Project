@@ -20,6 +20,11 @@ public class ItemManager {
         load();
     }
 
+    /**
+     * Renders all items
+     * @param g the graphics to render to
+     * @param camera the camera
+     */
     public void render(Graphics g, Camera camera) {
         for (Item item : items) {
             item.render(camera);
@@ -27,10 +32,20 @@ public class ItemManager {
     }
 
 
+    /**
+     * Gets all items within a certain distance of a point
+     * @param point the point
+     * @param distance the distance an item can be from the point (px)
+     * @return items within that distance
+     */
     public List<Item> getItemsNear(Vector2f point, float distance) {
         return items.stream().filter(item -> item.near(point, distance)).collect(Collectors.toList());
     }
 
+    /**
+     * Remove an item from the Item Manager
+     * @param item the item to remove
+     */
     public void removeItem(Item item) {
         deletionStack.add(item);
         items.remove(item);

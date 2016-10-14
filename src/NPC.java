@@ -18,6 +18,11 @@ abstract public class NPC extends Unit {
         super(position, image, stats);
     }
 
+    /**
+     * Updates a Player
+     * @param delta how long since last update
+     * @param world the world where the player is
+     */
     public void update(Player player, boolean wannaTalk, int delta, World world) {
         if (wannaTalk && distanceFromPoint(player.getPosition()) < NPC.TALK_DISTANCE) {
             interact(player);
@@ -27,11 +32,20 @@ abstract public class NPC extends Unit {
 
     }
 
+    /**
+     * Initiates talking to a player
+     * @param player the player to talk to
+     */
     public void talk(Player player) {
         talkTime = TOTAL_TALK_TIME;
         text = getText(player);
     }
 
+    /**
+     * Renders a NPC to the screen
+     * @param g the graphics (to determine where to print it)
+     * @param camera the camera
+     */
     public void render(Graphics g, Camera camera) {
         if (talkTime > 0) {
             renderText(g);
@@ -39,6 +53,10 @@ abstract public class NPC extends Unit {
         super.render(g, camera);
     }
 
+    /**
+     * What happens when an NPC dies
+     * @param world the world the NPC dies in
+     */
     public void onDeath(World world) {
     } // NPC can't die
 
@@ -71,6 +89,10 @@ abstract public class NPC extends Unit {
 
     abstract public String getText(Player player);
 
+    /**
+     * Initiates and interaction between this NPC and a player
+     * @param player the player to have the interaction with
+     */
     public void interact(Player player) {
         talk(player);
     }

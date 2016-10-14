@@ -34,6 +34,11 @@ abstract public class Item {
         }
     }
 
+    /**
+     * Renders an item to the statusPanel
+     * @param camera the camera
+     * @param position where in the status panel to place it
+     */
     public void render(Camera camera, Vector2f position) {
         image.draw((int) position.getX(), (int) position.getY());
     }
@@ -43,7 +48,12 @@ abstract public class Item {
                 cam.getMinY() <= position.getY() && position.getY() <= cam.getMaxY();
     }
 
-
+    /**
+     * Returns true if a point is within a certain distance of the item
+     * @param point the point
+     * @param distance the distance (px)
+     * @return true if a point is within a certain distance of the item
+     */
     public boolean near(Vector2f point, float distance) {
         return position.distance(point) < distance;
     }
