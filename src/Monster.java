@@ -7,24 +7,61 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Monster extends Unit {
+abstract public class Monster extends Unit {
 
 
-    private float speed;
-
+    public static final float ATTACK_DISTANCE = 50; // distance (pxs) at which monster attacks
+    abstract public float getSpeed();
     public Monster(Vector2f position, Image image, Stats stats) {
         super(position, image, stats);
     }
 
+    /**
+     * Renders a Monster to the screen
+     * @param camera the camera
+     */
     public void render(Graphics g, Camera camera) {
         super.render(g, camera);
     }
 
-    public void onDeath(World world) {
-
+    /**
+     * Updates a Monster
+     * @param delta how long since last update
+     * @param world the world where the monster is
+     */
+    public void update(int delta, World world) {
+        super.update(delta,world);
     }
 
-    public float getSpeed() {
-        return speed;
+    /**
+     * What happens when a Monster dies
+     * @param world the world the Monster dies in
+     */
+    public void onDeath(World world) {
+        world.getUnitManager().removeMonster(this);
+    }
+
+    /**
+     * gets a unit vector representing the direction of the player
+     * @param playerPosition
+     * @return
+     */
+    public Vector2f getDirectionToPlayer(Vector2f playerPosition) {
+
+        float    amount        = getSpeed();
+        float    distance      = playerPosition.distance(getPosition());
+        Vector2f vectorBetween = playerPosition.sub(getPosition());
+        float    x             = vectorBetween.getX() / distance * amount;
+        float    y             = vectorBetween.getY() / distance * amount;
+        return new Vector2f(x, y);
+    }
+
+    /**
+     * gets a unit vector representing the opposite direction of the player
+     * @param playerPosition
+     * @return
+     */
+    public Vector2f getDirectionFromPlayer(Vector2f playerPosition){
+        return getDirectionToPlayer(playerPosition).negate();
     }
 }

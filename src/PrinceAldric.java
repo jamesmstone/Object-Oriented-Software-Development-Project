@@ -8,17 +8,31 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 public class PrinceAldric extends NPC {
-    public static final int initialCooldown = 0;
-    public static final int initialDamage   = 0;
-    public static final int initialMaxHP    = 1;
-    public static final int initialHP       = 1;
-
+    public static final int INITIAL_COOLDOWN = 0;
+    public static final int INITIAL_DAMAGE   = 0;
+    public static final int INITIAL_MAX_HP   = 1;
+    public static final int INITIAL_HP       = 1;
+    /**
+     * Generates Prince Aldric
+     * @param position starting position of Prince Aldric
+     * @throws SlickException
+     */
     public PrinceAldric(Vector2f position) throws SlickException {
-        super(position, new Image(RPG.ASSETS_PATH + "/units/prince.png"), new Stats(initialCooldown, initialDamage, initialMaxHP, initialHP));
+        super(position, new Image(RPG.ASSETS_PATH + "/units/prince.png"), new Stats(INITIAL_COOLDOWN, INITIAL_DAMAGE, INITIAL_MAX_HP, INITIAL_HP));
     }
 
-    public String getText(int[] inventory) {
-        return ""; // todo
+    /**
+     * The text to display
+     * @param player the player you are interacting with
+     * @return the conversation
+     */
+    @Override
+    public String getText(Player player) {
+        for (Item item :player.getInventory()) {
+            if(item instanceof ElixirOfLife){
+                return "The elixir! My father is cured! Thank you!";
+            }
+        }
+        return "Please seek out the Elixir of Life to cure the king.";
     }
-
 }

@@ -9,13 +9,21 @@ public class Stats {
         this.hp = initialHp = hp;
     }
 
+    /**
+     * Reduces hp by amount
+     * @param amount
+     */
     public void reduceHP(int amount) {
         hp -= amount;
     }
 
+    /**
+     * resets hp to its original value
+     */
     public void resetHP() {
         hp = maxHP;
     }
+
 
     public int getCooldown() {
         return cooldown;
@@ -33,10 +41,14 @@ public class Stats {
         return hp;
     }
 
+    /**
+     * Modifies a stats object
+     * @param statsToAdd the modifications you wish to make
+     */
     public void modify(Stats statsToAdd){
         this.cooldown += statsToAdd.cooldown;
-        this.maxDamage =+ statsToAdd.maxDamage;
-        this.maxHP =+ statsToAdd.maxHP;
-        this.hp =+ statsToAdd.hp;
+        this.maxDamage += statsToAdd.maxDamage;
+        this.maxHP += statsToAdd.maxHP;
+        this.hp += statsToAdd.hp;
     }
 }
