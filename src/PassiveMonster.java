@@ -40,11 +40,19 @@ abstract public class PassiveMonster extends Monster {
         super.update(delta, world);
     }
 
+    /**
+     * What happens when attacked
+     * @param damage the amount of damage to give to this unit
+     */
     public void onAttacked(int damage) {
         attackedTime = TIME_RUNNING;
         super.onAttacked(damage);
     }
 
+    /**
+     * get the speed of the monster
+     * @return the monsters speed (px/ms)
+     */
     public float getSpeed() {
         return speed;
     }

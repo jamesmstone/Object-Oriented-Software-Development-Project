@@ -12,11 +12,20 @@ public class PrinceAldric extends NPC {
     public static final int INITIAL_DAMAGE   = 0;
     public static final int INITIAL_MAX_HP   = 1;
     public static final int INITIAL_HP       = 1;
-
+    /**
+     * Generates Prince Aldric
+     * @param position starting position of Prince Aldric
+     * @throws SlickException
+     */
     public PrinceAldric(Vector2f position) throws SlickException {
         super(position, new Image(RPG.ASSETS_PATH + "/units/prince.png"), new Stats(INITIAL_COOLDOWN, INITIAL_DAMAGE, INITIAL_MAX_HP, INITIAL_HP));
     }
 
+    /**
+     * The text to display
+     * @param player the player you are interacting with
+     * @return the conversation
+     */
     @Override
     public String getText(Player player) {
         for (Item item :player.getInventory()) {

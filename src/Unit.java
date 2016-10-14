@@ -144,6 +144,7 @@ public abstract class Unit {
 
     /**
      * attack this unit
+     *
      * @param damage the amount of damage to give to this unit
      */
     public void onAttacked(int damage) {
@@ -173,12 +174,27 @@ public abstract class Unit {
                 cam.getMinY() <= getY() && getY() <= cam.getMaxY();
     }
 
+    /**
+     * Returns the distance the unit is from a point
+     *
+     * @param point the point
+     * @return distance in px
+     */
     public float distanceFromPoint(Vector2f point) {
         return getPosition().distance(point);
     }
-    public boolean near(Vector2f point, float dist){
+
+    /**
+     * Determines in a point is near the unit
+     *
+     * @param point the point
+     * @param dist  how far away it can be
+     * @return true if the point is near the unit
+     */
+    public boolean near(Vector2f point, float dist) {
         return distanceFromPoint(point) < dist;
     }
+
     public Vector2f getPosition() {
         return position.copy();
     }

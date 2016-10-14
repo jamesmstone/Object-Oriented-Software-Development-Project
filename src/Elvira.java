@@ -34,7 +34,7 @@ public class Elvira extends NPC {
     /**
      * The text to display
      * @param player the player you are interacting with
-     * @return
+     * @return the convo
      */
     public String getText(Player player) {
         if(player.getStats().getHp() == player.getStats().getMaxHP()) {

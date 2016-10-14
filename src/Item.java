@@ -22,6 +22,10 @@ abstract public class Item {
     }
 
 
+    /**
+     *  What happens when an item is picked up
+     * @param playerStats the stats to modify
+     */
     public abstract void onPickup(Stats playerStats);
 
     /**

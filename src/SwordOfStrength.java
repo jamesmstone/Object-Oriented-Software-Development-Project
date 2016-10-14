@@ -13,10 +13,19 @@ public class SwordOfStrength extends Item {
     private static final int EFECT_ON_MAX_DAMAGE = 30;
     private static final int EFECT_ON_COOLDOWN   = 0;
 
+    /**
+     * Generates Sword Of Strength
+     * @param position  The amulets location
+     * @throws SlickException
+     */
     SwordOfStrength(Vector2f position) throws SlickException {
         super(new Image(RPG.ASSETS_PATH + "/items/sword.png"), position);
     }
 
+    /**
+     * what happens on picking up an item
+     * @param playerStats the stats to modify
+     */
     public void onPickup(Stats playerStats) {
         playerStats.modify(new Stats(EFECT_ON_COOLDOWN, EFECT_ON_MAX_DAMAGE, EFECT_ON_MAX_HP, EFECT_ON_HP));
     }

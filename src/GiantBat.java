@@ -14,7 +14,7 @@ public class GiantBat extends PassiveMonster {
     public static final int INITIAL_HP       = 40;
 
     /**
-     * Generates a Giat Bat Monster
+     * Generates a Giant Bat Monster
      * @param position starting position of the giant bat monster
      * @throws SlickException
      */
